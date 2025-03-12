@@ -6,16 +6,29 @@ body {
 }
 
 header {
-    background: #333;
+    background-color: #333;
     color: white;
-    padding: 10px;
 }
 
 nav a {
     color: white;
-    margin: 0 15px;
+    margin: 0 10px;
     text-decoration: none;
 }
+
+.card {
+    margin: 15px;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.btn-primary, .btn-success {
+    margin: 10px 0;
+}
+
 
 .hero {
     padding: 50px;

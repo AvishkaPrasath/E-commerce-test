@@ -75,34 +75,3 @@ function loginUser(event) {
         alert("Invalid email or password!");
     }
 }
-
-// Check if User is Logged In
-function checkUser() {
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
-    if (!currentUser) {
-        alert("Please log in first!");
-        window.location.href = "login.php";
-    }
-}
-
-// Dynamically Show Login/Logout Option
-function updateAuthLinks() {
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    const authLinks = document.getElementById("auth-links");
-
-    if (currentUser) {
-        authLinks.innerHTML = `<a href="#" class="nav-link text-white" onclick="logout()">Logout</a>`;
-    } else {
-        authLinks.innerHTML = `<a href="login.php" class="nav-link text-white">Login</a>`;
-    }
-}
-
-function logout() {
-    localStorage.removeItem("currentUser");
-    alert("Logged out successfully!");
-    updateAuthLinks();
-    window.location.href = "index.php";
-}
-
-updateAuthLinks();

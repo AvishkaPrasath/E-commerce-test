@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +28,29 @@
                             <li class="nav-item"><a class="nav-link text-white" href="index.php">Home</a></li>
                             <li class="nav-item"><a class="nav-link text-white" href="products.php">Products</a></li>
                             <li class="nav-item"><a class="nav-link text-white" href="cart.php">Cart</a></li>
-                            <li class="nav-item"><span id="auth-links"></span></li>
+
+                            <?php if (isset($_SESSION['user_id'])): ?>
+                                <!-- If User Is Logged In -->
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <?= htmlspecialchars($_SESSION['username']); ?>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="user_account.php">My Account</a></li>
+                                        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'user'): ?>
+                                            <li><a class="dropdown-item" href="submit_product.php">Submit Product</a></li>
+                                        <?php elseif (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                                            <li><a class="dropdown-item" href="admin.php">Admin Panel</a></li>
+                                        <?php endif; ?>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                                    </ul>
+                                </li>
+                            <?php else: ?>
+                                <!-- If User Is Logged Out -->
+                                <li class="nav-item"><a class="nav-link text-white" href="login.php">Login</a></li>
+                                <li class="nav-item"><a class="nav-link text-white" href="signup.php">Register</a></li>
+                            <?php endif; ?>
                         </ul>
                     </div>
                 </div>
